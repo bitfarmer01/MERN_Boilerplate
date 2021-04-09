@@ -1,18 +1,13 @@
-const express = require('express');
-const cors = require('cors');
-
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
 const app = express();
+connectDB();
 
-app.get('/api/customers', cors(), (req, res) => {
-  const customers = [
-    {id: 1, firstName: 'John', lastName: 'Doe'},
-    {id: 2, firstName: 'Brad', lastName: 'Traversy'},
-    {id: 3, firstName: 'Mary', lastName: 'Swanson'},
-  ];
-
+app.use('helmet')
+app.get("/", cors(), (req, res) => {
   res.json(customers);
 });
 
-const port = 5000;
-
-app.listen(port, () => `Server running on port ${port}`);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server started on Port ${PORT}`));
